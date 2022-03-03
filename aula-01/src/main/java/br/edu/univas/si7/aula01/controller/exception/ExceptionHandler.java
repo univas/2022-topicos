@@ -13,10 +13,10 @@ public class ExceptionHandler {
 
 	@org.springframework.web.bind.annotation.ExceptionHandler(ObjectNotFoundException.class)
 	public ResponseEntity<StandardError> handleObjectNotFound(
-						ObjectNotFoundException ex, HttpServletRequest req) {
+						ObjectNotFoundException excecaoCapturada, HttpServletRequest req) {
 		
 		StandardError error = new StandardError(
-				ex.getMessage(),
+				excecaoCapturada.getMessage(),
 				HttpStatus.NOT_FOUND.value(), 
 				new Date());
 		
