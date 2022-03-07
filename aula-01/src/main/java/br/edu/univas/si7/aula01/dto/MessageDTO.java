@@ -5,7 +5,10 @@ import br.edu.univas.si7.aula01.model.Message;
 public class MessageDTO {
 
 	private String message;
-		
+	
+	public MessageDTO() {
+	}
+	
 	public MessageDTO(Message msg) {
 		this.message = msg.getMessage();
 	}

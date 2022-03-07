@@ -45,4 +45,32 @@ public class MessageService {
 		return obj.map(msg -> new MessageDTO(msg))
 				.orElseThrow(() -> new ObjectNotFoundException("Mensagem não encontrada: " + id));
 	}
+	
+	public void createMessage(MessageDTO dto) {
+		Message msg = toMessage(dto);
+		msgRepo.save(msg);
+	}
+
+	private Message toMessage(MessageDTO dto) {
+		Message msg = new Message();
+		msg.setMessage(dto.getMessage());
+		return msg;
+	}
+
+	public void updateMessage(MessageDTO dto, Integer id) {
+		Optional<Message> opt = msgRepo.findById(id);
+		//Fazer outras validações
+		
+		if(!opt.isPresent()) {
+			//erro
+			throw new ObjectNotFoundException("Mensagem não encontrada: " + id);
+		}
+		Message msg = opt.get();
+		updateData(dto, msg);
+		msgRepo.save(msg);
+	}
+
+	private void updateData(MessageDTO dto, Message msg) {
+		msg.setMessage(dto.getMessage());
+	}
 }
