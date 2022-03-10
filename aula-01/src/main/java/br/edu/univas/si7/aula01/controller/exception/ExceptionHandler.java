@@ -22,4 +22,16 @@ public class ExceptionHandler {
 		
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
 	}
+	
+	@org.springframework.web.bind.annotation.ExceptionHandler(InvalidDataException.class)
+	public ResponseEntity<StandardError> handleInvalidData(
+			InvalidDataException excecaoCapturada, HttpServletRequest req) {
+		
+		StandardError error = new StandardError(
+				excecaoCapturada.getMessage(),
+				HttpStatus.BAD_REQUEST.value(), 
+				new Date());
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+	}
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import br.edu.univas.si7.aula01.controller.exception.InvalidDataException;
 import br.edu.univas.si7.aula01.controller.exception.ObjectNotFoundException;
 import br.edu.univas.si7.aula01.dto.MessageDTO;
 import br.edu.univas.si7.aula01.model.Message;
@@ -35,15 +36,17 @@ public class MessageService {
 				.collect(Collectors.toList());
 	}
 	
-	public MessageDTO getMessageById(@PathVariable Integer id) {
+	public Message getMessageById(@PathVariable Integer id) {
+		if(id == null) {
+			throw new InvalidDataException("id não pode ser null.");
+		}
 		Optional<Message> obj = msgRepo.findById(id);
 		
 //		Message msg = obj.orElseThrow(() -> new ObjectNotFoundException("Mensagem não encontrada: " + id));
 //		MessageDTO dto = new MessageDTO(msg);
 //		return dto;
 		
-		return obj.map(msg -> new MessageDTO(msg))
-				.orElseThrow(() -> new ObjectNotFoundException("Mensagem não encontrada: " + id));
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Mensagem não encontrada: " + id));
 	}
 	
 	public void createMessage(MessageDTO dto) {
@@ -51,26 +54,28 @@ public class MessageService {
 		msgRepo.save(msg);
 	}
 
+	public void updateMessage(MessageDTO dto, Integer id) {
+		if(dto == null) {
+			throw new InvalidDataException("Mensagem não pode ser null.");
+		}
+		Message msg = getMessageById(id);
+		updateData(dto, msg);
+		msgRepo.save(msg);
+	}
+
+	public void deleteMessage(Integer id) {
+		Message msg = getMessageById(id);
+		msgRepo.delete(msg);
+	}
+
+	private void updateData(MessageDTO dto, Message msg) {
+		msg.setMessage(dto.getMessage());
+	}
+	
 	private Message toMessage(MessageDTO dto) {
 		Message msg = new Message();
 		msg.setMessage(dto.getMessage());
 		return msg;
 	}
 
-	public void updateMessage(MessageDTO dto, Integer id) {
-		Optional<Message> opt = msgRepo.findById(id);
-		//Fazer outras validações
-		
-		if(!opt.isPresent()) {
-			//erro
-			throw new ObjectNotFoundException("Mensagem não encontrada: " + id);
-		}
-		Message msg = opt.get();
-		updateData(dto, msg);
-		msgRepo.save(msg);
-	}
-
-	private void updateData(MessageDTO dto, Message msg) {
-		msg.setMessage(dto.getMessage());
-	}
 }
