@@ -17,6 +17,6 @@ public class HelloController {
 
 	@GetMapping("/v3")
 	public Message helloMessage() {
-		return new Message(1, "Hello from v3");
+		return new Message(1, "Hello from v3", 1);
 	}
 }

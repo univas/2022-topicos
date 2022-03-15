@@ -20,9 +20,9 @@ public class Aula01Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Message msg = new Message(1, "Hello from v4");
+		Message msg = new Message(1, "Hello from v4", 3);
 		msgRepo.save(msg);
-		Message m2 = new Message(0, "Segunda mensagem");
+		Message m2 = new Message(0, "Segunda mensagem", 4);
 		msgRepo.save(m2);
 	}
 }

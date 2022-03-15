@@ -2,6 +2,8 @@ package br.edu.univas.si7.aula01.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,13 +40,13 @@ public class MessageController {
 
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void createMessage(@RequestBody MessageDTO dto) {
+	public void createMessage(@RequestBody @Valid MessageDTO dto) {
 		service.createMessage(dto);
 	}
 
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void updateMessage(@RequestBody MessageDTO dto, @PathVariable Integer id) {
+	public void updateMessage(@RequestBody @Valid MessageDTO dto, @PathVariable Integer id) {
 		service.updateMessage(dto, id);
 	}
 	

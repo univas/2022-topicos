@@ -70,11 +70,13 @@ public class MessageService {
 
 	private void updateData(MessageDTO dto, Message msg) {
 		msg.setMessage(dto.getMessage());
+		msg.setPriority(dto.getPriority());
 	}
 	
 	private Message toMessage(MessageDTO dto) {
 		Message msg = new Message();
 		msg.setMessage(dto.getMessage());
+		msg.setPriority(dto.getPriority());
 		return msg;
 	}
 

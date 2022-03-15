@@ -12,14 +12,16 @@ public class Message {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int code;
 	private String message;
-	
+	private Integer priority;
+
 	public Message() {
 	}
-	
-	public Message(int code, String message) {
+
+	public Message(int code, String message, Integer priority) {
 		super();
 		this.code = code;
 		this.message = message;
+		this.priority = priority;
 	}
 
 	public int getCode() {
@@ -36,5 +38,13 @@ public class Message {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public Integer getPriority() {
+		return priority;
+	}
+
+	public void setPriority(Integer priority) {
+		this.priority = priority;
 	}
 }
