@@ -18,12 +18,15 @@ public class MessageDTO {
 	@Positive(message = "A prioridade deve ser um valor positivo.")
 	private Integer priority;
 	
+	private String priorityText;
+	
 	public MessageDTO() {
 	}
 	
 	public MessageDTO(Message msg) {
 		this.message = msg.getMessage();
-		this.priority = msg.getPriority();
+		this.priority = msg.getPriority().getCode();
+		this.priorityText = msg.getPriority().name();
 	}
 	
 	public String getMessage() {
@@ -40,5 +43,9 @@ public class MessageDTO {
 	
 	public void setPriority(Integer priority) {
 		this.priority = priority;
+	}
+	
+	public String getPriorityText() {
+		return priorityText;
 	}
 }

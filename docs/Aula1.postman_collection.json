@@ -49,7 +49,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"message\": \"Nova mensagem 1 update\",\r\n    \"priority\": 2\r\n}",
+					"raw": "{\r\n    \"message\": \"Nova mensagem 1 update\",\r\n    \"priority\": 20\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

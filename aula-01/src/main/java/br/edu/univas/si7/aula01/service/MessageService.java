@@ -12,6 +12,7 @@ import br.edu.univas.si7.aula01.controller.exception.InvalidDataException;
 import br.edu.univas.si7.aula01.controller.exception.ObjectNotFoundException;
 import br.edu.univas.si7.aula01.dto.MessageDTO;
 import br.edu.univas.si7.aula01.model.Message;
+import br.edu.univas.si7.aula01.model.support.MessagePriority;
 import br.edu.univas.si7.aula01.repository.MessageRepository;
 
 @Service
@@ -70,13 +71,13 @@ public class MessageService {
 
 	private void updateData(MessageDTO dto, Message msg) {
 		msg.setMessage(dto.getMessage());
-		msg.setPriority(dto.getPriority());
+		msg.setPriority(MessagePriority.getPriority(dto.getPriority()));
 	}
 	
 	private Message toMessage(MessageDTO dto) {
 		Message msg = new Message();
 		msg.setMessage(dto.getMessage());
-		msg.setPriority(dto.getPriority());
+		msg.setPriority(MessagePriority.getPriority(dto.getPriority()));
 		return msg;
 	}
 
