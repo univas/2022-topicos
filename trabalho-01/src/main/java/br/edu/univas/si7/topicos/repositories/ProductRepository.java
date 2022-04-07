@@ -18,7 +18,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
                  + " where p.name like %:name% and cat in :categories")
     @Transactional(readOnly = true)
     List<Product> search(@Param("name") String productName, 
-                         @Param("categories") List<Category> categorie);
+                         @Param("categories") List<Category> categories);
 
     //same result as the method search
     @Transactional(readOnly = true)
