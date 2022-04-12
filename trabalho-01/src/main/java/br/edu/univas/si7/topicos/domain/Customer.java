@@ -25,7 +25,6 @@ public class Customer implements Serializable {
 	// @Enumerated(EnumType.ORDINAL)
 	// não funciona em conjunto com o AttributeConverter de Category
 	private CustomerType type;
-	private String password;
 	private String phoneNumber;
 
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.REMOVE)
@@ -34,12 +33,14 @@ public class Customer implements Serializable {
 	@OneToMany(mappedBy = "customer")
 	private List<Order> orders = new ArrayList<>();
 
-	public Customer(String id, String name, String email, String phoneNumber, CustomerType type, String password) {
+	public Customer() {
+	}
+
+	public Customer(String id, String name, String email, String phoneNumber, CustomerType type) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.type = type;
-		this.password = password;
 		this.phoneNumber = phoneNumber;
 	}
 
@@ -81,14 +82,6 @@ public class Customer implements Serializable {
 
 	public void setType(CustomerType type) {
 		this.type = type;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getPhoneNumber() {

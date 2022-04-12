@@ -12,38 +12,37 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Address implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String street;
-    private int number;
-    private String extra;
-    private String neighbour;
-    private String zipCode;
-    private String city;
-    private String state;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	private String street;
+	private int number;
+	private String extra;
+	private String neighbour;
+	private String zipCode;
+	private String city;
+	private String state;
 
-    @ManyToOne
-    @JoinColumn(name = "CUSTOMER_FK")
-    private Customer customer;
+	@ManyToOne
+	@JoinColumn(name = "CUSTOMER_FK")
+	private Customer customer;
 
-    public Address() {
-    }
+	public Address() {
+	}
 
-    public Address(Integer id, String street, int number, String extra, String neighbour, String zipCode,
-            Customer customer, String city, String state) {
-        this.id = id;
-        this.street = street;
-        this.number = number;
-        this.extra = extra;
-        this.neighbour = neighbour;
-        this.zipCode = zipCode;
-        this.customer = customer;
-        this.city = city;
-        this.state = state;
-    }
+	public Address(String street, int number, String extra, String neighbour, String zipCode, Customer customer,
+			String city, String state) {
+		this.street = street;
+		this.number = number;
+		this.extra = extra;
+		this.neighbour = neighbour;
+		this.zipCode = zipCode;
+		this.customer = customer;
+		this.city = city;
+		this.state = state;
+	}
 
-    public Integer getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -116,27 +115,27 @@ public class Address implements Serializable {
 	}
 
 	@Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Address other = (Address) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Address other = (Address) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
 }

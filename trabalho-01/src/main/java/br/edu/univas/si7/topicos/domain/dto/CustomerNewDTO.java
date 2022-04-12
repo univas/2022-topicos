@@ -47,9 +47,6 @@ public class CustomerNewDTO {
 	@Min(0)
 	private String state;
 
-	@NotEmpty(message = "Value can not be empty.")
-	private String password;
-
 	@NotNull(message = "Phone number can not be null.")
 	@NotEmpty(message = "Phone number can not be empty.")
 	@Size(min = 8, max = 20, message = "The size must be between 5 and 20.")
@@ -58,18 +55,8 @@ public class CustomerNewDTO {
 	public CustomerNewDTO() {
 	}
 
-	public CustomerNewDTO(String cpf,
-			@NotNull(message = "Value can not be null.") @NotEmpty(message = "Value can not be empty.") @Size(min = 5, max = 80, message = "The size must be between 5 and 80.") String name,
-			@NotNull(message = "Value can not be null.") @NotEmpty(message = "Value can not be empty.") @Email(message = "Invalid email.") String email,
-			@NotNull(message = "Value can not be null.") Integer type,
-			@NotEmpty(message = "Value can not be empty.") String street,
-			@NotNull(message = "Value can not be null.") @PositiveOrZero Integer number, String extra,
-			@NotEmpty(message = "Value can not be empty.") String neighbour,
-			@NotEmpty(message = "Value can not be empty.") String zipCode,
-			@NotNull(message = "Value can not be null.") @Min(0) String city,
-			@NotNull(message = "Value can not be null.") @Min(0) String state,
-			@NotEmpty(message = "Value can not be empty.") String password,
-			@NotNull(message = "Phone number can not be null.") @NotEmpty(message = "Phone number can not be empty.") @Size(min = 8, max = 20, message = "The size must be between 5 and 20.") String phoneNumber) {
+	public CustomerNewDTO(String cpf, String name, String email, Integer type, String street, Integer number,
+			String extra, String neighbour, String zipCode, String city, String state, String phoneNumber) {
 		super();
 		this.cpf = cpf;
 		this.name = name;
@@ -82,7 +69,6 @@ public class CustomerNewDTO {
 		this.zipCode = zipCode;
 		this.city = city;
 		this.state = state;
-		this.password = password;
 		this.phoneNumber = phoneNumber;
 	}
 
@@ -174,14 +160,6 @@ public class CustomerNewDTO {
 		this.state = state;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -194,8 +172,7 @@ public class CustomerNewDTO {
 	public String toString() {
 		return "CustomerNewDTO [cpf=" + cpf + ", name=" + name + ", email=" + email + ", type=" + type + ", street="
 				+ street + ", number=" + number + ", extra=" + extra + ", neighbour=" + neighbour + ", zipCode="
-				+ zipCode + ", city=" + city + ", state=" + state + ", password=" + password + ", phoneNumber="
-				+ phoneNumber + "]";
+				+ zipCode + ", city=" + city + ", state=" + state + ", phoneNumber=" + phoneNumber + "]";
 	}
 
 }
