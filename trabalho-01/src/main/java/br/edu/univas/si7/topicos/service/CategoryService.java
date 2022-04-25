@@ -55,6 +55,14 @@ public class CategoryService {
             throw new InvalidDataException("Can not delete a category with products.");
         }
     }
+    
+    public Category getOrCreateCategory(String categoryName) {
+    	Optional<Category> cat = repo.findByName(categoryName);
+		if(cat.isPresent()) {
+			return cat.get();
+		}
+		return repo.save(new Category(categoryName));
+    }
 
     public List<Category> findAllWithOrder(String orderBy, String direction) {
         return repo.findAll(Sort.by(Direction.valueOf(direction), orderBy));
@@ -68,4 +76,7 @@ public class CategoryService {
         existingObj.setName(category.getName());
     }
 
+    public static Category toCategory(String categoryName) {
+        return new Category(categoryName);
+    }
 }

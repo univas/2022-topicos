@@ -10,10 +10,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import br.edu.univas.si7.topicos.domain.Address;
 import br.edu.univas.si7.topicos.domain.Category;
 import br.edu.univas.si7.topicos.domain.Customer;
+import br.edu.univas.si7.topicos.domain.Product;
 import br.edu.univas.si7.topicos.domain.enums.CustomerType;
 import br.edu.univas.si7.topicos.repositories.AddressRepository;
 import br.edu.univas.si7.topicos.repositories.CategoryRepository;
 import br.edu.univas.si7.topicos.repositories.CustomerRepository;
+import br.edu.univas.si7.topicos.repositories.ProductRepository;
 
 @SpringBootApplication
 public class Trabalho01Application implements CommandLineRunner {
@@ -26,6 +28,9 @@ public class Trabalho01Application implements CommandLineRunner {
 
 	@Autowired
 	private AddressRepository addressRepo;
+	
+	@Autowired
+	private ProductRepository productRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Trabalho01Application.class, args);
@@ -53,5 +58,16 @@ public class Trabalho01Application implements CommandLineRunner {
 
 		customerRepo.saveAll(Arrays.asList(c1, c2));
 		addressRepo.saveAll(Arrays.asList(a1, a2, a3));
+		
+		Product p1 = new Product("P1", 1.1, cat1);
+		Product p2 = new Product("P2", 2.2, cat2);
+		Product p3 = new Product("P3", 3.3, cat3);
+		Product p4 = new Product("P4", 4.4, cat4);
+		Product p5 = new Product("P5", 5.5, cat1);
+		Product p6 = new Product("P6", 6.6, cat2);
+		Product p7 = new Product("P7", 7.7, cat3);
+		Product p8 = new Product("P8", 8.8, cat1);
+		
+		productRepo.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8));
 	}
 }
