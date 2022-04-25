@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
@@ -41,22 +42,35 @@ public class CustomerService {
 		if (existingCustomer.isPresent()) {
 			throw new InvalidDataException("Customer already exist with this id: " + newCustomer.getId());
 		}
-		//TODO: finalizar
-		return null;
+		checkDuplicateEmail(newCustomer.getEmail());
+
+		Customer customer = repo.save(newCustomer);
+		addressRepo.saveAll(customer.getAddresses());
+		return customer;
 	}
 
 	public void updateCustomer(Customer customer, String id) {
 		if (id == null || customer == null || !id.equals(customer.getId())) {
 			throw new InvalidDataException("Invalid customer id.");
 		}
-		//TODO: finalizar
+
+		checkEmailAlreadyExists(customer, id);
+		Customer existingObj = findById(id);
+
+		updateData(existingObj, customer);
+		repo.save(customer);
 	}
 
 	public void deleteCustomer(String id) {
 		if (id == null) {
 			throw new InvalidDataException("Customer id can not be null.");
 		}
-		//TODO: finalizar
+		Customer customer = findById(id);
+		try {
+			repo.delete(customer);
+		} catch (DataIntegrityViolationException e) {
+			throw new InvalidDataException("Can not delete a customer with products.");
+		}
 	}
 
 	public List<Customer> findAllWithOrder(String orderBy, String direction) {
