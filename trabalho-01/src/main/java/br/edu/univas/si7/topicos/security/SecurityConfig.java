@@ -17,7 +17,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	private static final String [] PUBLIC_GET_URLS = {
 			"/categories/**",
-			"/products/**"
+			"/products/**",
+			"/customers"
 	};
 	
 	private static final String [] PUBLIC_POST_URLS = {
