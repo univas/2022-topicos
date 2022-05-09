@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.edu.univas.si7.topicos.domain.dto.CredentialsDTO;
 import br.edu.univas.si7.topicos.service.UserService;
-import br.edu.univas.si7.topicos.support.exceptions.LoginError;
+import br.edu.univas.si7.topicos.support.LoginError;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
