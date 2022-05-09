@@ -2,6 +2,7 @@ package br.edu.univas.si7.topicos.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import br.edu.univas.si7.topicos.domain.Customer;
 import br.edu.univas.si7.topicos.domain.dto.CustomerDTO;
 import br.edu.univas.si7.topicos.domain.dto.CustomerNewDTO;
 import br.edu.univas.si7.topicos.domain.enums.CustomerType;
-import br.edu.univas.si7.topicos.domain.enums.Profile;
+import br.edu.univas.si7.topicos.domain.enums.UserProfile;
 import br.edu.univas.si7.topicos.repositories.AddressRepository;
 import br.edu.univas.si7.topicos.repositories.CustomerRepository;
 import br.edu.univas.si7.topicos.support.exceptions.InvalidDataException;
@@ -107,8 +108,8 @@ public class CustomerService {
 	public Customer toCustomer(CustomerDTO customer) {
 		Customer entity = new Customer(customer.getId(), customer.getName(), customer.getEmail(), customer.getPhoneNumber(),
 				CustomerType.toEnum(customer.getType()), customer.getPassword());
-		List<Profile> list = customer.getProfiles().stream().map(p -> Profile.toEnum(p)).collect(Collectors.toList());
-		entity.addProfiles(list);
+		Set<UserProfile> list = customer.getProfiles().stream().map(p -> UserProfile.toEnum(p)).collect(Collectors.toSet());
+		entity.addProfiles(list.toArray(new UserProfile[list.size()]));
 		return entity;
 	}
 
@@ -116,8 +117,8 @@ public class CustomerService {
 		Customer entity = new Customer(customerNewDTO.getCpf(), customerNewDTO.getName(), customerNewDTO.getEmail(),
 				customerNewDTO.getPhoneNumber(), CustomerType.toEnum(customerNewDTO.getType()), 
 				customerNewDTO.getPassword());
-		List<Profile> list = customerNewDTO.getProfiles().stream().map(p -> Profile.toEnum(p)).collect(Collectors.toList());
-		entity.addProfiles(list);
+		Set<UserProfile> list = customerNewDTO.getProfiles().stream().map(p -> UserProfile.toEnum(p)).collect(Collectors.toSet());
+		entity.addProfiles(list.toArray(new UserProfile[list.size()]));
 		return entity;
 	}
 

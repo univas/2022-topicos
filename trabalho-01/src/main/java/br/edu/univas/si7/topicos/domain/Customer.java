@@ -3,7 +3,9 @@ package br.edu.univas.si7.topicos.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
@@ -15,7 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import br.edu.univas.si7.topicos.domain.enums.CustomerType;
-import br.edu.univas.si7.topicos.domain.enums.Profile;
+import br.edu.univas.si7.topicos.domain.enums.UserProfile;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -55,7 +57,7 @@ public class Customer implements Serializable {
 	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "PROFILES")
-	private List<Profile> profiles = new ArrayList<Profile>();
+	private Set<UserProfile> profiles = new HashSet<UserProfile>();
 
 	public Customer(String id, String name, String email, String phoneNumber, CustomerType type, String password) {
 		this.id = id;
@@ -74,7 +76,7 @@ public class Customer implements Serializable {
 		this.orders.addAll(Arrays.asList(orders));
 	}
 	
-	public void addProfiles(List<Profile> profiles) {
-		this.profiles.addAll(profiles);
+	public void addProfiles(UserProfile... profiles) {
+		this.profiles.addAll(Arrays.asList(profiles));
 	}
 }

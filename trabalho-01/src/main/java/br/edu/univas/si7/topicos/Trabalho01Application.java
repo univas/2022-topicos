@@ -12,7 +12,7 @@ import br.edu.univas.si7.topicos.domain.Category;
 import br.edu.univas.si7.topicos.domain.Customer;
 import br.edu.univas.si7.topicos.domain.Product;
 import br.edu.univas.si7.topicos.domain.enums.CustomerType;
-import br.edu.univas.si7.topicos.domain.enums.Profile;
+import br.edu.univas.si7.topicos.domain.enums.UserProfile;
 import br.edu.univas.si7.topicos.repositories.AddressRepository;
 import br.edu.univas.si7.topicos.repositories.CategoryRepository;
 import br.edu.univas.si7.topicos.repositories.CustomerRepository;
@@ -50,8 +50,8 @@ public class Trabalho01Application implements CommandLineRunner {
 		Customer c1 = new Customer("11.111.111-11", "C1", "c1@gmail.com", "1111-1111", CustomerType.NATURAL_PERSON, "12345");
 		Customer c2 = new Customer("22.222.222-22", "C2", "c2@gmail.com", "2222-2222", CustomerType.LEGAL_PERSON, "67890");
 
-		c1.addProfiles(Arrays.asList(Profile.ADMIM));
-		c2.addProfiles(Arrays.asList(Profile.CUSTOMER));
+		c1.addProfiles(UserProfile.ADMIN);
+		c2.addProfiles(UserProfile.CUSTOMER);
 		
 		Address a1 = new Address("R1", 1, "111", "B1", "11111", c1, "cidade01", "MG");
 		Address a2 = new Address("R2", 2, "222", "B2", "22222", c1, "cidade02", "MG");
