@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import br.edu.univas.si7.topicos.domain.Address;
 import br.edu.univas.si7.topicos.domain.Category;
@@ -32,6 +33,9 @@ public class Trabalho01Application implements CommandLineRunner {
 	
 	@Autowired
 	private ProductRepository productRepo;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Trabalho01Application.class, args);
@@ -47,8 +51,10 @@ public class Trabalho01Application implements CommandLineRunner {
 
 		catRepo.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5));
 
-		Customer c1 = new Customer("11.111.111-11", "C1", "c1@gmail.com", "1111-1111", CustomerType.NATURAL_PERSON, "12345");
-		Customer c2 = new Customer("22.222.222-22", "C2", "c2@gmail.com", "2222-2222", CustomerType.LEGAL_PERSON, "67890");
+		Customer c1 = new Customer("11.111.111-11", "C1", "c1@gmail.com", "1111-1111", CustomerType.NATURAL_PERSON, 
+				passwordEncoder.encode("12345"));
+		Customer c2 = new Customer("22.222.222-22", "C2", "c2@gmail.com", "2222-2222", CustomerType.LEGAL_PERSON, 
+				passwordEncoder.encode("67890"));
 
 		c1.addProfiles(UserProfile.ADMIN);
 		c2.addProfiles(UserProfile.CUSTOMER);

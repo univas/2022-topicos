@@ -1,18 +1,14 @@
 package br.edu.univas.si7.topicos.security;
 
 import java.util.Date;
-import java.util.logging.Level;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import lombok.extern.java.Log;
 
 @Component
-@Log
 public class JWTUtil {
 
     @Value("${jwt.secret}")
