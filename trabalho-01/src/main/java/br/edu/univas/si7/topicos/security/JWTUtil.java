@@ -29,31 +29,31 @@ public class JWTUtil {
             .compact();
     }
 
-//    public boolean isTokenValid(String token) {
-//        Claims claims = getClaims(token);
-//        if (claims != null) {
-//            String userName = claims.getSubject();
-//            Date expirationDate = claims.getExpiration();
-//            if (userName != null && expirationDate != null && expirationDate.after(new Date())) {
-//                log.info("Token for user: " + userName + " is valid!");
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-//
-//    private Claims getClaims(String token) {
-//        try {
-//            return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody();
-//        } catch (Exception e) {
-//            // if it could not get the claims from the token (because invalid or any other problem)
-//            log.log(Level.WARNING, "Could not get Claims for token: " + token);
-//            return null;
-//        }
-//    }
-//
-//    public String getUserName(String token) {
-//        Claims claims = getClaims(token);
-//        return claims == null ? null : claims.getSubject();
-//    }
+    public boolean isTokenValid(String token) {
+        Claims claims = getClaims(token);
+        if (claims != null) {
+            String userName = claims.getSubject();
+            Date expirationDate = claims.getExpiration();
+            if (userName != null && expirationDate != null && expirationDate.after(new Date())) {
+                log.info("Token for user: " + userName + " is valid!");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Claims getClaims(String token) {
+        try {
+            return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody();
+        } catch (Exception e) {
+            // if it could not get the claims from the token (because invalid or any other problem)
+            log.log(Level.WARNING, "Could not get Claims for token: " + token);
+            return null;
+        }
+    }
+
+    public String getUserName(String token) {
+        Claims claims = getClaims(token);
+        return claims == null ? null : claims.getSubject();
+    }
 }
