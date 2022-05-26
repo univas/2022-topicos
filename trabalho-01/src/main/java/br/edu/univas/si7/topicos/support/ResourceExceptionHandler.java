@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import br.edu.univas.si7.topicos.support.exceptions.AuthorizationException;
 import br.edu.univas.si7.topicos.support.exceptions.InvalidDataException;
 import br.edu.univas.si7.topicos.support.exceptions.ObjectNotFoundException;
 
@@ -42,6 +43,12 @@ public class ResourceExceptionHandler {
                 .forEach(err -> error.addError(err.getField(), err.getDefaultMessage()));
         return error;
     }
+    
+	@ExceptionHandler(AuthorizationException.class)
+	public ResponseEntity<StandardError> authorization(AuthorizationException e, HttpServletRequest request) {
+		StandardError err = new StandardError(e.getMessage(), HttpStatus.FORBIDDEN.value(), new Date());
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+	}
 
     @ExceptionHandler(Exception.class)
     @ResponseBody

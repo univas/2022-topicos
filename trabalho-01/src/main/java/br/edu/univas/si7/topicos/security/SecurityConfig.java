@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private static final String[] PUBLIC_URLS = { "/h2-console/**" };
 
-	private static final String[] PUBLIC_GET_URLS = { "/categories/**", "/products/**", "/customers" };
+	private static final String[] PUBLIC_GET_URLS = { "/categories/**", "/products/**" };
 
 //	private static final String[] PUBLIC_POST_URLS = { "/categories/**", "/customer/**"
 //			//, "/login/**" não precisa

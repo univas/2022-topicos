@@ -19,6 +19,8 @@ import br.edu.univas.si7.topicos.domain.enums.CustomerType;
 import br.edu.univas.si7.topicos.domain.enums.UserProfile;
 import br.edu.univas.si7.topicos.repositories.AddressRepository;
 import br.edu.univas.si7.topicos.repositories.CustomerRepository;
+import br.edu.univas.si7.topicos.security.UserPrincipal;
+import br.edu.univas.si7.topicos.support.exceptions.AuthorizationException;
 import br.edu.univas.si7.topicos.support.exceptions.InvalidDataException;
 import br.edu.univas.si7.topicos.support.exceptions.ObjectNotFoundException;
 
@@ -36,6 +38,7 @@ public class CustomerService {
 	}
 
 	public Customer findById(String id) {
+		checkCustomer(id);
 		Optional<Customer> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Customer " + id + " not found."));
 	}
@@ -126,5 +129,12 @@ public class CustomerService {
 		return new Address(customerNewDTO.getStreet(), customerNewDTO.getNumber(), customerNewDTO.getExtra(),
 				customerNewDTO.getNeighbour(), customerNewDTO.getZipCode(), customerEntity, customerNewDTO.getCity(),
 				customerNewDTO.getState());
+	}
+	
+	public void checkCustomer(String id) {
+		UserPrincipal user = UserService.getAuthenticated();
+		if (user == null || !user.hasRole(UserProfile.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
 	}
 }

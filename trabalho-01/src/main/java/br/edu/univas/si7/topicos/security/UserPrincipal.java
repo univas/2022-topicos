@@ -63,6 +63,11 @@ public class UserPrincipal implements UserDetails {
         return true;
     }
 
+    /**
+     * Verifica se o usuário possui o perfil do parâmetro. 
+     * @param profile
+     * @return
+     */
     public boolean hasRole(UserProfile profile) {
         return authorities.contains(new SimpleGrantedAuthority(profile.getDescription()));
     }
