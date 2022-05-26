@@ -7,6 +7,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.edu.univas.si7.topicos.domain.Customer;
 import lombok.Data;
 
@@ -28,9 +30,10 @@ public class CustomerDTO {
 
 	private List<AddressDTO> addresses = new ArrayList<>();
 	
+	@JsonIgnore
 	private String password;
 
-	private List<String> profiles;
+	private List<String> profiles = new ArrayList<String>();
 
 	public CustomerDTO(Customer customer) {
 		this.id = customer.getId();
@@ -39,7 +42,9 @@ public class CustomerDTO {
 		this.type = customer.getType().getCode();
 		this.phoneNumber = customer.getPhoneNumber();
 		this.password = customer.getPassword();
-		customer.getProfiles().stream().map(p -> this.profiles.add(p.toString()));
+		System.out.println(customer.getProfiles());
+		customer.getProfiles().stream().forEach(p -> this.profiles.add(p.getDescription()));
+		System.out.println(profiles);
 		customer.getAddresses().forEach(a -> addresses.add(new AddressDTO(a)));
 	}
 
