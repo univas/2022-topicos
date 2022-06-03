@@ -5,7 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import br.edu.univas.si7.aula01.model.Message;
 
-@Repository
-public interface MessageRepository extends JpaRepository<Message, Integer>{
+//@Repository
+public interface MessageRepository //extends JpaRepository<Message, Integer>
+{
 
 }

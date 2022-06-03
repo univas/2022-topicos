@@ -1,20 +1,22 @@
 package br.edu.univas.si7.aula01.model;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import br.edu.univas.si7.aula01.model.support.MessagePriority;
 
-@Entity
+//@Entity
+@Document(collection = "Messages")
 public class Message {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int code;
+	//@Id
+	@org.springframework.data.annotation.Id
+	private String id;
+	private String code;
 	private String message;
 	
 	//@Enumerated(EnumType.ORDINAL) //não funciona junto com o MessagePriorityConverter
@@ -23,18 +25,18 @@ public class Message {
 	public Message() {
 	}
 
-	public Message(int code, String message, MessagePriority priority) {
+	public Message(String code, String message, MessagePriority priority) {
 		super();
 		this.code = code;
 		this.message = message;
 		this.priority = priority;
 	}
 
-	public int getCode() {
+	public String getCode() {
 		return code;
 	}
 
-	public void setCode(int code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 
@@ -53,4 +55,13 @@ public class Message {
 	public void setPriority(MessagePriority priority) {
 		this.priority = priority;
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 }

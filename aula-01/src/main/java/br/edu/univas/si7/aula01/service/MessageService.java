@@ -13,13 +13,13 @@ import br.edu.univas.si7.aula01.controller.exception.ObjectNotFoundException;
 import br.edu.univas.si7.aula01.dto.MessageDTO;
 import br.edu.univas.si7.aula01.model.Message;
 import br.edu.univas.si7.aula01.model.support.MessagePriority;
-import br.edu.univas.si7.aula01.repository.MessageRepository;
+import br.edu.univas.si7.aula01.repository.MessageMongoRepository;
 
 @Service
 public class MessageService {
 
 	@Autowired
-	private MessageRepository msgRepo;
+	private MessageMongoRepository msgRepo;
 	
 	public List<MessageDTO> getAllMessages() {
 		List<Message> listMSG = msgRepo.findAll();
