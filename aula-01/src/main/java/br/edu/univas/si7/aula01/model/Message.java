@@ -13,14 +13,17 @@ import br.edu.univas.si7.aula01.model.support.MessagePriority;
 @Document(collection = "Messages")
 public class Message {
 
-	//@Id
+	// @Id
 	@org.springframework.data.annotation.Id
 	private String id;
 	private String code;
 	private String message;
-	
-	//@Enumerated(EnumType.ORDINAL) //não funciona junto com o MessagePriorityConverter
+
+	// @Enumerated(EnumType.ORDINAL) //não funciona junto com o
+	// MessagePriorityConverter
 	private MessagePriority priority;
+
+	private User user;
 
 	public Message() {
 	}
@@ -63,5 +66,12 @@ public class Message {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 }

@@ -7,7 +7,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import br.edu.univas.si7.aula01.model.Message;
 import br.edu.univas.si7.aula01.model.User;
+import br.edu.univas.si7.aula01.model.support.MessagePriority;
+import br.edu.univas.si7.aula01.repository.MessageMongoRepository;
 import br.edu.univas.si7.aula01.repository.UserMongoRepository;
 
 @SpringBootApplication
@@ -22,6 +25,9 @@ public class Aula01Application implements CommandLineRunner {
 	
 	@Autowired
 	private UserMongoRepository userRepo;
+	
+	@Autowired
+	private MessageMongoRepository msgMongoRepo;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -33,9 +39,16 @@ public class Aula01Application implements CommandLineRunner {
 		userRepo.deleteAll();
 		userRepo.saveAll(Arrays.asList(u1, u2, u3));
 		
-//		Message msg = new Message(1, "Hello from v4", MessagePriority.MEDIUN);
+		Message m1 = new Message("1", "Primeira mensagem", MessagePriority.MEDIUN);
+		Message m2 = new Message("2", "Segunda mensagem", MessagePriority.HIGH);
+		
+		m1.setUser(u2);
+		m2.setUser(u3);
+		
+		msgMongoRepo.deleteAll();
+		msgMongoRepo.saveAll(Arrays.asList(m1, m2));
+
 //		msgRepo.save(msg);
-//		Message m2 = new Message(0, "Segunda mensagem", MessagePriority.HIGH);
 //		msgRepo.save(m2);
 	}
 }
