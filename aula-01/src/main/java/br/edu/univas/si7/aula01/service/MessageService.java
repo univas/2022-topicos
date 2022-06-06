@@ -37,7 +37,7 @@ public class MessageService {
 				.collect(Collectors.toList());
 	}
 	
-	public Message getMessageById(@PathVariable Integer id) {
+	public Message getMessageById(@PathVariable String id) {
 		if(id == null) {
 			throw new InvalidDataException("id não pode ser null.");
 		}
@@ -55,7 +55,7 @@ public class MessageService {
 		msgRepo.save(msg);
 	}
 
-	public void updateMessage(MessageDTO dto, Integer id) {
+	public void updateMessage(MessageDTO dto, String id) {
 		if(dto == null) {
 			throw new InvalidDataException("Mensagem não pode ser null.");
 		}
@@ -64,7 +64,7 @@ public class MessageService {
 		msgRepo.save(msg);
 	}
 
-	public void deleteMessage(Integer id) {
+	public void deleteMessage(String id) {
 		Message msg = getMessageById(id);
 		msgRepo.delete(msg);
 	}
