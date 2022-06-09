@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import br.edu.univas.si7.aula01.model.support.MessagePriority;
@@ -23,6 +24,7 @@ public class Message {
 	// MessagePriorityConverter
 	private MessagePriority priority;
 
+	@DBRef(lazy = true)
 	private User user;
 
 	public Message() {
