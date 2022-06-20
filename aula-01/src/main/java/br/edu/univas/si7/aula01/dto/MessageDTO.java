@@ -25,8 +25,10 @@ public class MessageDTO {
 	
 	public MessageDTO(Message msg) {
 		this.message = msg.getMessage();
-		this.priority = msg.getPriority().getCode();
-		this.priorityText = msg.getPriority().name();
+		if(msg.getPriority() != null) {
+			this.priority = msg.getPriority().getCode();
+			this.priorityText = msg.getPriority().name();
+		}
 	}
 	
 	public String getMessage() {

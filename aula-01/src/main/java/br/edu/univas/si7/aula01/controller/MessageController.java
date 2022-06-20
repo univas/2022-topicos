@@ -33,7 +33,7 @@ public class MessageController {
 	}
 
 	@GetMapping("/{id}")
-	public MessageDTO getMessageById(@PathVariable Integer id) {
+	public MessageDTO getMessageById(@PathVariable String id) {
 		Message msg = service.getMessageById(id);
 		return new MessageDTO(msg);
 	}
@@ -46,14 +46,14 @@ public class MessageController {
 
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void updateMessage(@RequestBody @Valid MessageDTO dto, @PathVariable Integer id) {
+	public void updateMessage(@RequestBody @Valid MessageDTO dto, @PathVariable String id) {
 		service.updateMessage(dto, id);
 	}
 	
 	//implementar o DELETE
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteMesage(@PathVariable Integer id) {
+	public void deleteMesage(@PathVariable String id) {
 		service.deleteMessage(id);
 	}
 	

@@ -13,13 +13,13 @@ import br.edu.univas.si7.aula01.controller.exception.ObjectNotFoundException;
 import br.edu.univas.si7.aula01.dto.MessageDTO;
 import br.edu.univas.si7.aula01.model.Message;
 import br.edu.univas.si7.aula01.model.support.MessagePriority;
-import br.edu.univas.si7.aula01.repository.MessageRepository;
+import br.edu.univas.si7.aula01.repository.MessageMongoRepository;
 
 @Service
 public class MessageService {
 
 	@Autowired
-	private MessageRepository msgRepo;
+	private MessageMongoRepository msgRepo;
 	
 	public List<MessageDTO> getAllMessages() {
 		List<Message> listMSG = msgRepo.findAll();
@@ -37,7 +37,7 @@ public class MessageService {
 				.collect(Collectors.toList());
 	}
 	
-	public Message getMessageById(@PathVariable Integer id) {
+	public Message getMessageById(@PathVariable String id) {
 		if(id == null) {
 			throw new InvalidDataException("id não pode ser null.");
 		}
@@ -55,7 +55,7 @@ public class MessageService {
 		msgRepo.save(msg);
 	}
 
-	public void updateMessage(MessageDTO dto, Integer id) {
+	public void updateMessage(MessageDTO dto, String id) {
 		if(dto == null) {
 			throw new InvalidDataException("Mensagem não pode ser null.");
 		}
@@ -64,7 +64,7 @@ public class MessageService {
 		msgRepo.save(msg);
 	}
 
-	public void deleteMessage(Integer id) {
+	public void deleteMessage(String id) {
 		Message msg = getMessageById(id);
 		msgRepo.delete(msg);
 	}
